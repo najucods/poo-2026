@@ -43,6 +43,7 @@ if __name__ == "__main__":
         if not jogador.estaVivo():
             print("\n", jogador.nome, "foi derrotada")
             break
+            
 
     print("-----Jogadores-----")
     jogador.ficha()
