@@ -1,47 +1,49 @@
-class Personagem:
-
-    def _init_(self, nome, vida, forca):
+class personagem():
+    def __init__(self, nome, vida, forca):
         self.nome = nome
         self.vida = vida
         self.forca = forca
 
     def receberDano(self, dano):
         self.vida = self.vida - dano
-        print(self.nome, "sofreu", dano, "de dano")
-
-    def estarvivo(self):
-        if self.vida > 0:
+        print("%s recebeu %d de dano" %(self.nome, dano))
+        if self.vida<0:
+            self.vida=0
+    
+    def estaVivo(self):
+        if self.vida>0:
             return True
         else:
             return False
 
     def ficha(self):
-        return self.nome + " vida: " + str(self.vida) + " força: " + str(self.forca)
-
+        print("\nNome: ", self.nome)
+        print("Vida: ", self.vida)
+        print("Força: ", self.forca)
+    
     def atacar(self, alvo):
-        print(self.nome, "ataca", alvo.nome)
+        print(self.nome, " ataca ", alvo.nome)
         alvo.receberDano(self.forca)
 
+if __name__ == "__main__":
 
-if _name_ == "_main_":
+    jogador = personagem("Angela", 100, 10)
+    chefe = personagem("Jane", 500, 40)
 
-    heroi = Personagem("Mulan", 200, 40)
-    chefe = Personagem("Thanos", 200, 5)
-
-    while heroi.estarvivo() and chefe.estarvivo():
-
-        heroi.atacar(chefe)
-        print(heroi.nome, "atacou", chefe.nome,
-              ". Vida do chefe:", chefe.vida)
-
-        if not chefe.estarvivo():
-            print(chefe.nome, "foi derrotado!", heroi.nome, "venceu!")
+    print("---Ficha---")
+    jogador.ficha()
+    chefe.ficha()
+    print("---Batalha---")
+    while jogador.estaVivo() and chefe.estaVivo():
+        jogador.atacar(chefe)
+        if not chefe.estaVivo():
+            print("\n", chefe.nome, "derrotado")
+            break
+        chefe.atacar(jogador)
+        if not jogador.estaVivo():
+            print("\n", jogador.nome, "derrotado")
             break
 
-        chefe.atacar(heroi)
-        print(chefe.nome, "atacou", heroi.nome,
-              ". Vida do herói:", heroi.vida)
-
-        if not heroi.estarvivo():
-            print(heroi.nome, "foi derrotado!", chefe.nome, "venceu!")
-            break
+    print("---Ficha---")
+    jogador.ficha()
+    chefe.ficha()
