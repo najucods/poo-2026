@@ -1,35 +1,62 @@
 public class Personagem {
+    
     String nome;
     int vida;
     int forca;
-
-    public Personagem(String n, int v, int f) {
-        nome = n;
-        vida = v;
-        forca = f;
+    
+    public Personagem(String nome,int vida,int forca){
+        this.nome = nome;
+        this.vida = vida;
+        this.forca = forca;
     }
-
-    public void receberDano(int dano) {
+    
+    void receberDano(int dano) {
         vida = vida - dano;
+        System.out.println(nome + " sofreu " + dano + " de dano");
+    }
 
-        if (vida < 0) {
-            vida = 0;
+    boolean estarvivo(){
+        if(vida > 0){
+            return true;
+        } else {
+            return false;
         }
+    
     }
-
-    public boolean estaVivo() {
-        return vida > 0;
+    
+    String ficha() {
+    return nome + "vida: " + vida + "força: " + forca +;
     }
-
-    public void ficha() {
-        System.out.println("Nome: " + nome);
-        System.out.println("Vida: " + vida);
-        System.out.println("Força: " + forca);
+    
+    void atacar(Personagem alvo) {
+    System.out.println(nome + " ataca " + alvo.nome);
+    alvo.receberDano(forca);
     }
+    
+}
 
-    public void atacar(Personagem alvo) {
-        alvo.receberDano(forca);
+public class Main {
+    public static void main(String[] args) {
+        
+        Personagem heroi = new Personagem("Mulan", 200, 40);
+        Personagem chefe = new Personagem("Thanos", 200, 5);
+        
+        while (heroi.estaVivo() && chefe.estaVivo()) {
+            heroi.atacar(chefe);
+            System.out.println(heroi.nome + " atacou " + chefe.nome + ". Vida do chefe: " + chefe.vida);
 
-        System.out.println(nome + " atacou " + alvo.nome +" causando " + forca + " de dano!");
+            if (!chefe.estaVivo()) {
+                System.out.println(chefe.nome + " foi derrotado! " + heroi.nome + " venceu!");
+                break;
+            }
+
+            chefe.atacar(heroi);
+            System.out.println(chefe.nome + " atacou " + heroi.nome + ". Vida do herói: " + heroi.vida);
+
+            if (!heroi.estaVivo()) {
+                System.out.println(heroi.nome + " foi derrotado! " + chefe.nome + " venceu!");
+                break;
+            }
+        }
     }
 }
