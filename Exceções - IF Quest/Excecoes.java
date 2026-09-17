@@ -3,9 +3,7 @@
 
 /* Para que foi utilizada: Foi utilizada para auxiliar na implementação do tratamento de
 exceções em Java, incluindo IllegalArgumentException,try/catch, finally, SemManaException 
-e ForcaInsuficienteException. 
-
-O que foi modificado manualmente: o código foi revisado pelo chat, e o mesmo corrigiu alguns erros.*/*/
+e ForcaInsuficienteException, o código foi revisado pelo chat, e o mesmo corrigiu alguns erros.*/
 
 import java.util.ArrayList;
 import java.util.List;
